@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación - Sistema de Turnos</title>
+    <!-- Ruta correcta al CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../assets/Slides tv.png"image/x-icon">
+</head>
+<body>
+    <div class="page-background asignacion-page">
+        <div class="page-overlay"></div>
+        
+        <!-- Header compartido con logo y botón de volver -->
+        <header class="page-header">
+            <img src="../assets/logo blanco fondo azul - copia.png" alt="Logo" class="header-logo">
+            <a href="./inicio.html" class="back-link">Volver a Inicio</a>
+        </header>
+
+        <div class="main-content">
+            <h1>Asignación de Turnos</h1>
+
+            <!-- Panel central que contiene los cards -->
+            <div class="main-panel">
+                <!-- ÚNICO layout-container para poner los cards lado a lado -->
+                <div class="layout-container">
+
+                    <!-- Card Izquierdo: Filtro de Áreas (SIN ANIDACIÓN) -->
+                    <div class="card">
+                        <h2 class="card-title">1. Seleccione un Área</h2>
+                        <div id="gallery-areas" class="gallery-areas">
+                            <p>Cargando áreas...</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Derecho: Lista de Personal (SIN ANIDACIÓN) -->
+                    <div class="card">
+                        <h2 class="card-title">2. Personal en el Área</h2>
+                        <div id="gallery-names" class="gallery-names">
+                            <p>Seleccione un área para ver el personal.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Fin del panel central -->
+
+            <!-- Botones de acción debajo del panel -->
+            <div class="action-buttons">
+                <button class="btn-gestion">Gestión de Turnos</button>
+                <button class="btn-generar" id="btn-generar">Generar Turnos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- El modal de gestión no necesita cambios -->
+    <div id="gestion-modal" class="modal-overlay">
+        <div class="modal-content">
+            <header class="modal-header">
+                <h2>Gestión y Programación de Turnos</h2>
+                <!-- NUEVO ELEMENTO PARA LA SEMANA ACTUAL -->
+                <div id="current-week-display" class="current-week"></div>
+                <button id="close-modal-btn" class="close-button">&times;</button>
+            </header>
+            <div class="modal-body">
+                <div class="controls-container">
+                    <label for="semana-selector">Seleccionar Semana:</label>
+                    <select id="semana-selector"></select>
+                </div>
+                <div class="matriz-container">
+                    <table id="gestion-matriz">
+                        <thead>
+                            <!-- CAMBIO: Añadir un ID a esta fila <tr> -->
+                            <tr id="matriz-header-row">
+                                <th>Empleado</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                                <th>Sábado</th>
+                                <th>Domingo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matriz-body">
+                        <!-- ... -->
+                            <tr><td colspan="8" class="loading-state">Cargando datos...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <footer class="modal-footer">
+                <button id="guardar-cambios-btn" class="btn-generar">Guardar Cambios</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <!-- CONTENEDOR PARA NOTIFICACIONES -->
+    <div id="notification-container"></div>
+</body>
+</html>

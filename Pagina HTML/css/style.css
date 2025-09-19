@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Roboto:wght@400;500;700&display=swap');
+
+/* --- VARIABLES Y ESTILOS BASE --- */
+:root {
+  --primary: #270089; --secondary: #00ACD8; --accent: #D50057;
+  --white: #ffffff; --text-dark: #333; --text-light: #f1f1f1;
+  --border-light: #e0e0e0; --background: #f4f7f6;
+  --background-overlay: rgba(32, 7, 66, 0.68);
+  --card-opaque-color: rgba(32, 7, 66, 0.67);
+}
+body { margin: 0; font-family: 'Roboto', sans-serif; color: var(--text-dark); overflow-x: hidden; background-color: var(--background); }
+* { box-sizing: border-box; }
+
+/* --- ESTRUCTURA DE PÁGINA CON FONDO Y OVERLAY --- */
+.page-background { min-height: 100vh; background-size: cover; background-position: center; position: relative; display: flex; flex-direction: column; padding: 2rem; }
+.page-overlay { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--background-overlay); z-index: 1; }
+.login-page { background-image: url('../assets/DSC00082.jpg'); }
+.inicio-page { background-image: url('../assets/WhatsApp\ Image\ 2024-06-26\ at\ 12.07.51\ PM\ \(1\).jpg'); }
+.asignacion-page { background-image: url('../assets/IMG_E3403.jpg'); }
+
+/* --- ESTILOS DE LOGIN --- */
+.login-container { display: flex; justify-content: center; align-items: center; flex-grow: 1; position: relative; z-index: 2; padding: 1rem; }
+.login-box { background: var(--card-opaque-color); padding: 2.5rem; border-radius: 15px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5); width: 100%; max-width: 600px; text-align: center; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2); animation: fadeIn 0.8s ease-out; color: var(--text-light); }
+.login-box label { color: var(--text-light); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+.login-header { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+.login-header img { width: 282px; height: auto; object-fit: contain; }
+.login-header-text { font-family: 'Lato', sans-serif; font-weight: 900; font-size: 3rem; color: var(--accent); text-transform: uppercase; }
+.input-group { margin-bottom: 1rem; text-align: left; }
+.input-group input { width: 100%; padding: 0.8rem; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; font-size: 1rem; background-color: rgba(0,0,0,0.2); color: var(--white); }
+.login-button { width: 100%; padding: 0.9rem; border: none; border-radius: 5px; background-color: var(--accent); color: var(--white); font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+.login-button:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(213, 0, 87, 0.4); }
+#error-message { color: #ff8a8a; margin-bottom: 1rem; min-height: 1.2em; font-size: 0.9rem; }
+
+/* --- HEADER COMPARTIDO (Inicio y Asignación) --- */
+.page-header { position: absolute; top: 0; left: 0; width: 100%; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
+.header-logo { width: 260px; height: auto; }
+
+/* --- ESTILOS DE INICIO --- */
+.inicio-page { align-items: center; }
+.main-content-inicio { position: relative; z-index: 2; width: 100%; max-width: 1200px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-grow: 1; }
+.logout-button { background: transparent; color: var(--white); border: 2px solid var(--white); padding: 0.7rem 1.5rem; border-radius: 50px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem; }
+.logout-button:hover { background: var(--white); color: var(--primary); }
+#welcome-message { font-size: 2.8rem; color: var(--white); margin: 0 0 2rem 0; text-shadow: 1px 1px 8px rgba(0,0,0,0.5); }
+.action-cards-container { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+.action-card { background: var(--card-opaque-color); border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 2rem; border-radius: 15px; width: 100%; max-width: 350px; text-decoration: none; color: var(--text-light); transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+.action-card:hover { transform: translateY(-10px) scale(1.03); background: rgba(39, 0, 137, 0.5); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+.action-card h2 { color: var(--white); margin-top: 0; border-bottom: 2px solid var(--secondary); padding-bottom: 0.5rem; margin-bottom: 1rem; }
+
+/* --- ESTILOS DE ASIGNACIÓN --- */
+.asignacion-page { align-items: center; padding-top: 8rem; }
+.back-link { color: var(--white); text-decoration: none; font-weight: bold; padding: 0.7rem 1.5rem; border-radius: 50px; border: 2px solid var(--white); transition: all 0.3s ease; }
+.back-link:hover { background: var(--white); color: var(--primary); }
+.main-content { position: relative; z-index: 2; width: 100%; max-width: 1200px; text-align: center; }
+.main-content > h1 { color: var(--white); margin: 0 0 2rem 0; font-size: 2.5rem; }
+.main-panel { background: rgba(255, 255, 255, 0.98); padding: 2rem; border-radius: 15px; }
+.layout-container { display: flex; flex-direction: row; flex-wrap: wrap; gap: 2rem; width: 100%; }
+.card { background: var(--white); border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); flex: 1; min-width: 300px; }
+.card-title { margin-top: 0; color: var(--primary); font-size: 1.2rem; border-bottom: 3px solid var(--secondary); padding-bottom: 0.75rem; margin-bottom: 1.5rem; }
+.action-buttons { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; }
+.btn-gestion, .btn-generar { padding: 0.9rem 2rem; border-radius: 50px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.btn-gestion:hover, .btn-generar:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+.btn-gestion { background-color: var(--white); color: var(--primary); border-color: var(--primary); }
+.btn-gestion:hover { background-color: var(--primary); color: var(--white); }
+.btn-generar { background-color: var(--accent); color: var(--white); border-color: var(--accent); }
+.btn-generar:hover { background-color: #a70044; border-color: #a70044; }
+
+/* --- ESTILOS MEJORADOS PARA GALERÍAS --- */
+#gallery-areas, #gallery-names { max-height: 25rem; overflow-y: auto; padding-right: 0.5rem; }
+.area-item { display: block; width: 100%; padding: 1rem; border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer; background: #f9fafb; color: var(--text-dark); transition: all 0.2s ease-out; text-align: left; box-sizing: border-box; margin-bottom: 0.75rem; font-weight: 500; }
+.area-item:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0, 172, 216, 0.2); border-color: var(--secondary); }
+.area-item.selected { color: var(--white); border-color: var(--primary); background: linear-gradient(45deg, var(--primary), #4a19a1); box-shadow: 0 6px 15px rgba(39, 0, 137, 0.3); transform: translateX(5px); }
+.person-item { padding: 0.9rem 0.5rem; border-bottom: 1px solid #f0f0f0; transition: background-color 0.2s ease; }
+.person-item:last-child { border-bottom: none; }
+.person-item:hover { background-color: #f0f8ff; }
+
+/* --- ESTILOS DE NOTIFICACIONES (TOAST) --- */
+#notification-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.toast { display: flex; align-items: center; padding: 15px 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); color: var(--white); font-weight: 500; animation: slideUp 0.3s ease-out, fadeOutToast 0.5s ease-in 3.5s forwards; min-width: 320px; border-left: 5px solid; }
+.toast.success { background-color: var(--primary); border-left-color: var(--secondary); }
+.toast.error { background-color: var(--accent); border-left-color: var(--white); }
+.toast-message { margin-left: 10px; }
+@keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeOutToast { from { opacity: 1; } to { opacity: 0; transform: translateY(20px); } }
+
+/* --- ESTILOS MEJORADOS PARA MODAL Y MATRIZ --- */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(12, 2, 26, 0.7); backdrop-filter: blur(5px); display: none; justify-content: center; align-items: center; z-index: 1000; animation: fadeInModal 0.3s ease-out; }
+@keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+.modal-content { background-color: #f7f9fc; border-radius: 16px; width: 95%; max-width: 1400px; height: 90vh; max-height: 850px; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 1px solid rgba(255, 255, 255, 0.1); transform: scale(0.95); animation: zoomInModal 0.3s ease-out forwards; }
+@keyframes zoomInModal { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 1px solid var(--border-light); }
+.modal-header h2 { margin: 0; color: var(--primary); font-size: 1.3rem; }
+.close-button { background: none; border: none; font-size: 2.5rem; font-weight: 300; cursor: pointer; color: #aaa; line-height: 1; transition: all 0.2s ease; }
+.close-button:hover { color: var(--accent); transform: rotate(90deg); }
+.modal-body { flex-grow: 1; overflow: hidden; padding: 1.5rem 2rem 2rem 2rem; display: flex; flex-direction: column; }
+.modal-footer { padding: 1rem 2rem; background-color: #eef2f7; border-top: 1px solid var(--border-light); text-align: right; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+.modal-powerbi { width: 90vw; height: 90vh; max-width: 1600px; }
+.modal-powerbi .modal-body { padding: 0; } .modal-powerbi iframe { border: none; }
+.controls-container { margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0; }
+.controls-container label { font-weight: 500; color: var(--text-dark); }
+#semana-selector { padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid var(--border-light); background-color: var(--white); font-size: 1rem; }
+#semana-selector:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(39, 0, 137, 0.1); }
+.matriz-container { flex-grow: 1; overflow: auto; border: 1px solid var(--border-light); border-radius: 8px; background-color: var(--white); }
+#gestion-matriz { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+#gestion-matriz thead { position: sticky; top: 0; z-index: 10; }
+#gestion-matriz th { background-color: #f7f9fc; font-weight: 700; padding: 1rem 0.5rem; color: #555; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.8rem; border-bottom: 2px solid var(--border-light); }
+#gestion-matriz td { border: none; border-bottom: 1px solid #f0f0f0; padding: 0; text-align: center; min-width: 130px; }
+#gestion-matriz tr:last-child td { border-bottom: none; }
+#gestion-matriz tbody tr { transition: background-color 0.2s ease; }
+#gestion-matriz tbody tr:hover { background-color: #f0f8ff; }
+#gestion-matriz th:first-child, #gestion-matriz td:first-child { position: sticky; left: 0; z-index: 5; background-color: #f7f9fc; min-width: 280px; text-align: left; padding: 0.75rem 1rem; font-weight: 500; border-right: 1px solid var(--border-light); }
+#gestion-matriz tbody tr:hover td:first-child { background-color: #e9f5ff; }
+.loading-state { padding: 3rem !important; font-style: italic; color: #888; font-size: 1.1rem; }
+td.turno-dia { background-color: #d1e7ff; } td.turno-noche { background-color: #f8d7da; } td.descanso { background-color: #e9ecef; } td.vacaciones { background-color: #fff3cd; } td.suspension { background-color: #f5c2c7; } td.capacitacion { background-color: #cff4fc; } td.calamidad { background-color: #d6d8db; } td.incapacidad { background-color: #d3d3d4; } td.vacio { background-color: transparent; }
+
+/* === NUEVOS ESTILOS PARA SELECTORES DE TURNO === */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.select-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  border-bottom: 2px solid #888;
+  border-right: 2px solid #888;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.select-wrapper:hover::after {
+  border-color: var(--primary);
+}
+
+.shift-select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 0.8rem 2rem 0.8rem 1rem; /* Más padding a la derecha para no tapar la flecha */
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align: center;
+  font-family: inherit;
+  color: var(--text-dark);
+  border-radius: 0; /* Sin bordes redondeados para que llene la celda */
+}
+
+.shift-select:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--secondary);
+}
+
+/* Scrollbar Minimalista */
+*::-webkit-scrollbar { width: 8px; }
+*::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+*::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+*::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+/* --- ESTILOS PARA EL BOTÓN DE ACTUALIZACIÓN DEL MODAL --- */
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.refresh-button {
+  background-color: #f0f0f0;
+  border: 1px solid var(--border-light);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.2s ease-out;
+}
+
+.refresh-button:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+.refresh-button:active {
+  transform: scale(0.95);
+}
+
+/* Animación de giro */
+.refresh-button.spinning svg {
+  animation: spin 0.5s ease-out;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- NUEVO: Línea separadora cada 4 registros en la matriz --- */
+#gestion-matriz tbody tr:nth-child(4n):not(:last-child) td {
+  /* 
+   * tr:nth-child(4n): Selecciona cada 4ª fila (4, 8, 12, etc.).
+   * :not(:last-child): Asegura que no se aplique si la 4ª fila es la última.
+   * td: Aplica el estilo a todas las celdas de esa fila.
+  */
+  border-bottom: 2px solid var(--secondary); /* Usamos el color cian para un separador claro y visible */
+}
+
+/* --- NUEVO: Indicador de Semana Actual --- */
+.current-week {
+  padding: 8px 16px;
+  border-radius: 50px; /* Forma de píldora */
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 172, 216, 0.3);
+  margin-left: auto; /* Empuja el elemento a la derecha */
+  margin-right: 1rem; /* Espacio antes del botón de cerrar */
+  animation: pulse 2s infinite ease-in-out;
+  white-space: nowrap; /* Evita que el texto se parta en dos líneas */
+}
+
+.current-week .week-number {
+  font-weight: 700;
+  background-color: var(--white);
+  color: var(--primary);
+  padding: 2px 6px;
+  border-radius: 5px;
+  margin-left: 8px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 172, 216, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 172, 216, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 172, 216, 0.3);
+  }
+}
+
+/* --- NUEVO: Estilos para la fecha en el header de la matriz --- */
+#gestion-matriz th .header-date {
+  display: block; /* Pone la fecha en una nueva línea */
+  font-size: 0.8rem;
+  font-weight: 400; /* Más ligero que el nombre del día */
+  color: #777;
+  margin-top: 4px;
+}

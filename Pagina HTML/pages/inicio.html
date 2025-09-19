@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Sistema de Turnos</title>
+    <!-- Ruta correcta al CSS subiendo un nivel -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" href="../assets/Slides tv.png"image/x-icon">
+</head>
+<body>
+    <div class="page-background inicio-page">
+        <div class="page-overlay"></div>
+
+        <!-- Header compartido -->
+        <header class="page-header">
+            <!-- Asegúrate de que esta imagen esté en la carpeta /assets/ -->
+            <img src="../assets/logo blanco fondo azul - copia.png" alt="Logo" class="header-logo">
+            <button class="logout-button" id="logout-button">Cerrar Sesión</button>
+        </header>
+
+        <!-- Contenido principal centrado -->
+        <div class="main-content-inicio">
+            <div class="welcome-container">
+                <h1 id="welcome-message"></h1>
+            </div>
+
+            <div class="action-cards-container">
+                <!-- Card para Asignación de Turnos -->
+                <a href="asignacion.html" class="action-card">
+                    <h2>Asignación de Turnos</h2>
+                    <p>Gestiona y programa los turnos del personal.</p>
+                </a>
+                
+                <!-- Card para Reporte Power BI -->
+                <a href="#" class="action-card" id="reporte-btn">
+                    <h2>Reporte Power BI</h2>
+                    <p>Visualiza los datos y métricas de la operación.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA EL REPORTE DE POWER BI -->
+    <div id="reporte-modal" class="modal-overlay">
+        <div class="modal-content modal-powerbi">
+            <header class="modal-header">
+                <!-- NUEVO CONTENEDOR PARA EL TÍTULO Y EL BOTÓN -->
+                <div class="modal-header-left">
+                    <h2>Reporte Interactivo</h2>
+                    <!-- ESTE ES EL NUEVO BOTÓN -->
+                    <button id="refresh-reporte-btn" class="refresh-button" title="Actualizar reporte">
+                        <!-- Icono SVG de actualización -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16">
+                            <path fill="currentColor" d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z"/>
+                        </svg>
+                    </button>
+                </div>
+                <button id="close-reporte-modal-btn" class="close-button">&times;</button>
+            </header>
+            <div class="modal-body">
+                <iframe title="Reporte Power BI" width="100%" height="100%" src="https://apps.gelcointernational.com/sites/pbiViewer/index.php?group=9830ba76-934c-47f4-800f-9b5e280258e0&reports=46599df0-6208-47dc-bf01-3af601648b1c&refresh=1" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ruta correcta al JS subiendo un nivel -->
+    <script src="../js/app.js"></script>
+    <!-- CONTENEDOR PARA NOTIFICACIONES -->
+    <div id="notification-container"></div>
+</body>
+</html>
