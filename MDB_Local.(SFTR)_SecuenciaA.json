@@ -1,0 +1,336 @@
+[{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f06"
+  },
+  "fecha": {
+    "$date": "2024-02-12T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Lunes",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f07"
+  },
+  "fecha": {
+    "$date": "2024-02-13T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Martes",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f08"
+  },
+  "fecha": {
+    "$date": "2024-02-14T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Miércoles",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f09"
+  },
+  "fecha": {
+    "$date": "2024-02-15T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Jueves",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0a"
+  },
+  "fecha": {
+    "$date": "2024-02-16T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Viernes",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0b"
+  },
+  "fecha": {
+    "$date": "2024-02-17T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Sábado",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0c"
+  },
+  "fecha": {
+    "$date": "2024-02-18T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Domingo",
+  "semana": 1
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0d"
+  },
+  "fecha": {
+    "$date": "2024-02-19T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Lunes",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0e"
+  },
+  "fecha": {
+    "$date": "2024-02-20T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Martes",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f0f"
+  },
+  "fecha": {
+    "$date": "2024-02-21T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Miércoles",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f10"
+  },
+  "fecha": {
+    "$date": "2024-02-22T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Jueves",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f11"
+  },
+  "fecha": {
+    "$date": "2024-02-23T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Viernes",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f12"
+  },
+  "fecha": {
+    "$date": "2024-02-24T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Sábado",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f13"
+  },
+  "fecha": {
+    "$date": "2024-02-25T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Domingo",
+  "semana": 2
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f14"
+  },
+  "fecha": {
+    "$date": "2024-02-26T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Lunes",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f15"
+  },
+  "fecha": {
+    "$date": "2024-02-27T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Martes",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f16"
+  },
+  "fecha": {
+    "$date": "2024-02-28T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Miércoles",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f17"
+  },
+  "fecha": {
+    "$date": "2024-02-29T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Jueves",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f18"
+  },
+  "fecha": {
+    "$date": "2024-03-01T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Viernes",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f19"
+  },
+  "fecha": {
+    "$date": "2024-03-02T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Sábado",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1a"
+  },
+  "fecha": {
+    "$date": "2024-03-03T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Domingo",
+  "semana": 3
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1b"
+  },
+  "fecha": {
+    "$date": "2024-03-04T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Lunes",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1c"
+  },
+  "fecha": {
+    "$date": "2024-03-05T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Martes",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1d"
+  },
+  "fecha": {
+    "$date": "2024-03-06T00:00:00.000Z"
+  },
+  "turno": "Turno Noche",
+  "descripcion": "Turno Noche",
+  "diaSemana": "Miércoles",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1e"
+  },
+  "fecha": {
+    "$date": "2024-03-07T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Jueves",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f1f"
+  },
+  "fecha": {
+    "$date": "2024-03-08T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Viernes",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f20"
+  },
+  "fecha": {
+    "$date": "2024-03-09T00:00:00.000Z"
+  },
+  "turno": "Descanso",
+  "descripcion": "Día de descanso",
+  "diaSemana": "Sábado",
+  "semana": 4
+},
+{
+  "_id": {
+    "$oid": "67ae3d28de1c2c6f6ecf3f21"
+  },
+  "fecha": {
+    "$date": "2024-03-10T00:00:00.000Z"
+  },
+  "turno": "Turno Día",
+  "descripcion": "Turno Día",
+  "diaSemana": "Domingo",
+  "semana": 4
+}]
