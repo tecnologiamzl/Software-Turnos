@@ -1,0 +1,236 @@
+[
+    {
+        "id": "40f408cd831a6034",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Logueo",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#9363b7",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "d78f3ec9e7f3c0d1",
+            "22b99bb47f1e30ee",
+            "8b511864f0ef52b1",
+            "469526259417a684",
+            "2788c3b39311fd44",
+            "6c2cbeaa584a8107",
+            "47900b912e8f84ca",
+            "0bbf5536147a52f9",
+            "2bf71a5434deb421",
+            "c4858ccb4fc19d50"
+        ],
+        "x": 34,
+        "y": 59,
+        "w": 992,
+        "h": 142
+    },
+    {
+        "id": "d78f3ec9e7f3c0d1",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "LoginSFT",
+        "url": "/LoginSFT",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "22b99bb47f1e30ee"
+            ]
+        ]
+    },
+    {
+        "id": "22b99bb47f1e30ee",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 25",
+        "func": "flow.set(\"user\", msg.payload.usuario);\nflow.set(\"password\", msg.payload.contrasena);\n\nmsg.payload={\n    \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "c4858ccb4fc19d50"
+            ]
+        ]
+    },
+    {
+        "id": "8b511864f0ef52b1",
+        "type": "nodeRedSharepoint",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "sharepoint": "016b70e765848f03",
+        "name": "",
+        "method": "GET",
+        "serviceUri": "https://progelnet.sharepoint.com/sites/Tecnologia/_api/web/lists/",
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "469526259417a684",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "name": "function 26",
+        "func": "// Verificar si existen los datos de entrada\nif (msg.payload && msg.payload.results) {\n    // Procesar cada item en el array 'results'\nnode.warn(msg.payload);\n\n    msg.payload = msg.payload.results.map(item => {\n        // Extraer las áreas (maneja casos donde no exista el campo)\n        let areas = [];\n        if (item.areas && item.areas.results && Array.isArray(item.areas.results)) {\n            areas = [...item.areas.results]; // Copia del array original\n        }\n\n        // Crear nuevo objeto con los campos requeridos\n        return {\n            ID: item.ID || item.Id,  // Usa 'ID' o falla a 'Id'\n            Title: item.Title || \"\",\n            password: item.password || \"\",\n            NombreCompleto: item.NombreCompleto || \"\",\n            correo: item.correo || \"\",\n            Areas: areas,             // Array de áreas\n            Cedula: item.Cedula || null\n        };\n    });\n} else {\n    msg.payload = []; // En caso de datos vacíos\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2788c3b39311fd44",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "name": "function 27",
+        "func": "let user = flow.get(\"user\");\nlet password = flow.get(\"password\");\n\n// Verificar que el payload es un array válido\nif (!Array.isArray(msg.payload)) {\n    msg.statusCode = 500;\n    msg.payload = \"Error: Formato de datos inválido\";\n    return msg;\n}\n\n// Buscar el usuario que coincide\nconst userFound = msg.payload.find(item =>\n    item.Title === user &&\n    item.password === password\n);\n\nif (userFound) {\n    msg.statusCode = 200;\n    msg.payload = {\n        nombre: userFound.Title || userFound.Title || \"\", // Ajustar nombre según el campo real\n        Areas: userFound.Areas || []\n    };\n} else {\n    msg.statusCode = 401;\n    msg.payload = \"Usuario o contraseña incorrectos\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c2cbeaa584a8107",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "47900b912e8f84ca",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "LoginSFT",
+        "collection": "LoginSFT",
+        "operation": "find.toArray",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0bbf5536147a52f9",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 52",
+        "func": "// Extraer los datos de la propiedad \"value\" si existe\nlet data = msg.payload;\n\nif (data && data.value && Array.isArray(data.value)) {\n    data = data.value;\n}\n\n// Si el payload no es un array, convertir si es objeto\nif (!Array.isArray(data) && typeof data === \"object\") {\n    data = Object.values(data);\n}\n\nif (Array.isArray(data)) {\n    node.warn(data);\n\n    msg.payload = data.map(item => {\n        let areas = [];\n        if (item.Areas && Array.isArray(item.Areas)) {\n            areas = [...item.Areas];\n        }\n\n        return {\n            username: item.Title || \"\",             // usuario en SharePoint\n            password: item.password || \"\",\n            full_name: item.NombreCompleto || \"\",  // nombre completo\n            correo: item.correo || \"\",             // si existe\n            Areas: areas,\n            document: item.Cedula || null          // cédula\n        };\n    });\n} else {\n    msg.payload = [];\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "2bf71a5434deb421"
+            ]
+        ]
+    },
+    {
+        "id": "2bf71a5434deb421",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 53",
+        "func": "let user = flow.get(\"user\");\nlet password = flow.get(\"password\");\n\n// Asegurarnos que payload sea array\nif (!Array.isArray(msg.payload)) {\n    msg.statusCode = 500;\n    msg.payload = \"Error: Formato de datos inválido\";\n    return msg;\n}\n\n// Buscar usuario\nconst userFound = msg.payload.find(item =>\n    item.username === user && item.password === password\n);\n\nif (userFound) {\n    msg.statusCode = 200;\n    msg.payload = {\n        nombre: userFound.full_name || userFound.username,\n        correo: userFound.correo || \"\",\n        Areas: userFound.Areas || [],\n        Cedula: userFound.document || null\n    };\n} else {\n    msg.statusCode = 401;\n    msg.payload = \"Usuario o contraseña incorrectos\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 100,
+        "wires": [
+            [
+                "6c2cbeaa584a8107"
+            ]
+        ]
+    },
+    {
+        "id": "c4858ccb4fc19d50",
+        "type": "http request",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "PowerAutomate API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://default628717ef459543e4a72ff0884921a8.97.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1f06b098301546ae9ad66c695827bd09/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WTaJKMgolx4I9ppRws_1NyTRCMMWeeKEDBgo59UCNQc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "0bbf5536147a52f9"
+            ]
+        ]
+    },
+    {
+        "id": "016b70e765848f03",
+        "type": "nodeRedSharepoint-access",
+        "name": "Conexion SH"
+    },
+    {
+        "id": "231ca80c2cd7b9ce",
+        "type": "mongodb3",
+        "uri": "mongodb://admin:G3lc02025*@192.168.170.2:27017/MDB_Local?authSource=admin",
+        "name": "Mongo_Local_Serv",
+        "options": "",
+        "parallelism": -1
+    }
+]

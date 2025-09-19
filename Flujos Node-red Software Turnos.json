@@ -1,0 +1,1294 @@
+[
+    {
+        "id": "444c6d87b9487637",
+        "type": "tab",
+        "label": "Software Turnos",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "40f408cd831a6034",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Logueo",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#9363b7",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "d78f3ec9e7f3c0d1",
+            "22b99bb47f1e30ee",
+            "8b511864f0ef52b1",
+            "469526259417a684",
+            "2788c3b39311fd44",
+            "6c2cbeaa584a8107",
+            "47900b912e8f84ca",
+            "0bbf5536147a52f9",
+            "2bf71a5434deb421",
+            "c4858ccb4fc19d50"
+        ],
+        "x": 34,
+        "y": 59,
+        "w": 992,
+        "h": 142
+    },
+    {
+        "id": "d39c2fd81421091d",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Flujo Programación de Turnos",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#addb7b",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "a4671f2baac0edfd",
+            "02034ca2236a889f",
+            "2f0ef58ad8eefa29",
+            "5326d529b665f53b",
+            "b8ec7fa15cc8818c",
+            "03a87068838526bf",
+            "1a97448feb28ecb8",
+            "1637068d5dc7f2ac",
+            "5b20a97b44f7acd7",
+            "435e1ed664355a21",
+            "2eed1df3b53b6dc4",
+            "e8d1b671816f82a5",
+            "4ae3d5c008b09af3",
+            "4a68c8ba91fbd0cf",
+            "57631fb80fdde6a1",
+            "9045d0fc77933b8a",
+            "4009da9374feb3ec",
+            "9457fe23a5cbd0d4",
+            "2053814b2e8ba74f"
+        ],
+        "x": 34,
+        "y": 219,
+        "w": 992,
+        "h": 302
+    },
+    {
+        "id": "f6df5c2af35c5f38",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Actualizacion y Registro de Novedades",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#7fb7df",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "e1f010d6c4183550",
+            "58e2a8eccfaf647e",
+            "40d3f0345eceb972",
+            "302a56a224e12733",
+            "6903ac56a4979d59",
+            "047788443c6281bf",
+            "7168e30af840e06b",
+            "dd05a9e2845230b2",
+            "18e9732c033c3948",
+            "63352a48c71fa270",
+            "8e5c9a43de965eb2"
+        ],
+        "x": 34,
+        "y": 539,
+        "w": 1272,
+        "h": 122
+    },
+    {
+        "id": "80970f0e186f53ab",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Get para Programación",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#ffff7f",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "5470362400173944",
+            "56b4ef39e114983e",
+            "90b857e36a38b860",
+            "05502513d5fe4a18",
+            "a9ba996b6e10da86"
+        ],
+        "x": 34,
+        "y": 699,
+        "w": 832,
+        "h": 122
+    },
+    {
+        "id": "e9ab4188f0402b80",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Depurador de Variables",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#ff7f7f",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "a52c3c78b8116a62",
+            "be88bd9cb523fcf5",
+            "8f8da2eef49e7117",
+            "732099a9aac44933",
+            "4d181f2debb0faa0"
+        ],
+        "x": 34,
+        "y": 899,
+        "w": 572,
+        "h": 162
+    },
+    {
+        "id": "d78f3ec9e7f3c0d1",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "LoginSFT",
+        "url": "/LoginSFT",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 100,
+        "wires": [
+            [
+                "22b99bb47f1e30ee"
+            ]
+        ]
+    },
+    {
+        "id": "22b99bb47f1e30ee",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 25",
+        "func": "flow.set(\"user\", msg.payload.usuario);\nflow.set(\"password\", msg.payload.contrasena);\n\nmsg.payload={\n    \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "c4858ccb4fc19d50"
+            ]
+        ]
+    },
+    {
+        "id": "8b511864f0ef52b1",
+        "type": "nodeRedSharepoint",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "sharepoint": "016b70e765848f03",
+        "name": "",
+        "method": "GET",
+        "serviceUri": "https://progelnet.sharepoint.com/sites/Tecnologia/_api/web/lists/",
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "469526259417a684",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "name": "function 26",
+        "func": "// Verificar si existen los datos de entrada\nif (msg.payload && msg.payload.results) {\n    // Procesar cada item en el array 'results'\nnode.warn(msg.payload);\n\n    msg.payload = msg.payload.results.map(item => {\n        // Extraer las áreas (maneja casos donde no exista el campo)\n        let areas = [];\n        if (item.areas && item.areas.results && Array.isArray(item.areas.results)) {\n            areas = [...item.areas.results]; // Copia del array original\n        }\n\n        // Crear nuevo objeto con los campos requeridos\n        return {\n            ID: item.ID || item.Id,  // Usa 'ID' o falla a 'Id'\n            Title: item.Title || \"\",\n            password: item.password || \"\",\n            NombreCompleto: item.NombreCompleto || \"\",\n            correo: item.correo || \"\",\n            Areas: areas,             // Array de áreas\n            Cedula: item.Cedula || null\n        };\n    });\n} else {\n    msg.payload = []; // En caso de datos vacíos\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2788c3b39311fd44",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "name": "function 27",
+        "func": "let user = flow.get(\"user\");\nlet password = flow.get(\"password\");\n\n// Verificar que el payload es un array válido\nif (!Array.isArray(msg.payload)) {\n    msg.statusCode = 500;\n    msg.payload = \"Error: Formato de datos inválido\";\n    return msg;\n}\n\n// Buscar el usuario que coincide\nconst userFound = msg.payload.find(item =>\n    item.Title === user &&\n    item.password === password\n);\n\nif (userFound) {\n    msg.statusCode = 200;\n    msg.payload = {\n        nombre: userFound.Title || userFound.Title || \"\", // Ajustar nombre según el campo real\n        Areas: userFound.Areas || []\n    };\n} else {\n    msg.statusCode = 401;\n    msg.payload = \"Usuario o contraseña incorrectos\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c2cbeaa584a8107",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a4671f2baac0edfd",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Response back",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 780,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "02034ca2236a889f",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Subgrupos",
+        "url": "/calcularTurnos",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "2f0ef58ad8eefa29"
+            ]
+        ]
+    },
+    {
+        "id": "2f0ef58ad8eefa29",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 30",
+        "func": "// Guardar CC (cedulas)\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('CC', msg.payload.map(e => e.cedula));\n} else {\n    flow.set('CC', []);\n}\n\n// Guardar IDs (puedes usar _id si lo necesitas)\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('IDs', msg.payload.map(e => e._id));\n} else {\n    flow.set('IDs', []);\n}\n\n// Guardar Nombres\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('Nombres', msg.payload.map(e => e.nombre));\n} else {\n    flow.set('Nombres', []);\n}\n\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('Apellidos', msg.payload.map(e => e.apellidos));\n} else {\n    flow.set('Apellidos', []);\n}\n\n// Guardar área desde el primer elemento\nif (Array.isArray(msg.payload) && msg.payload.length > 0 && msg.payload[0].area) {\n    flow.set('area', msg.payload[0].area);\n} else {\n    flow.set('area', null);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "b8ec7fa15cc8818c"
+            ]
+        ]
+    },
+    {
+        "id": "5326d529b665f53b",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Db_SecuenciaB",
+        "collection": "(SFTR)_SecuenciaB",
+        "operation": "find.toArray",
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "5b20a97b44f7acd7"
+            ]
+        ]
+    },
+    {
+        "id": "b8ec7fa15cc8818c",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 31",
+        "func": "// Si tu nodo MongoDB usa msg.payload\nmsg.payload = {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "1a97448feb28ecb8"
+            ]
+        ]
+    },
+    {
+        "id": "03a87068838526bf",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 32",
+        "func": "/* node.warn({\n    area: flow.get('area'),\n    CC: flow.get('CC'),\n    IDs: flow.get('IDs'),\n    Nombres: flow.get('Nombres'),\n    Apellidos: flow.get('Apellidos')\n}); */\n// --- Utils ---\nfunction unwrapValue(obj) {\n    if (!obj) return \"\";\n    if (obj && typeof obj === \"object\" && obj.Value !== undefined) {\n        let inner = obj.Value.Value !== undefined ? obj.Value.Value : obj.Value;\n        return String(inner || \"\");\n    }\n    return String(obj);\n}\n\nfunction getLocalISOString() {\n    let now = new Date(), off = now.getTimezoneOffset();\n    now.setMinutes(now.getMinutes() - off);\n    return now.toISOString().replace('Z', '');\n}\n\nfunction shuffle(arr) {\n    let a = [...arr];\n    for (let i = a.length - 1; i > 0; i--) {\n        let j = Math.floor(Math.random() * (i + 1));\n        [a[i], a[j]] = [a[j], a[i]];\n    }\n    return a;\n}\n\nfunction getISOWeek(d) {\n    let date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));\n    let day = date.getUTCDay() || 7;\n    date.setUTCDate(date.getUTCDate() + 4 - day);\n    let start = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));\n    return Math.ceil((((date.getTime() - start.getTime()) / 86400000) + 1) / 7);\n}\n\n// --- Combina nombre y apellido sin dejar espacios sobrantes ---\nfunction combineName(nombre, apellido) {\n    nombre = (nombre || \"\").trim();\n    apellido = (apellido || \"\").trim();\n    if (nombre && apellido) return nombre + \" \" + apellido;\n    if (nombre) return nombre;\n    return apellido || \"\";\n}\n\n// --- Genera orden intermitente: alterna entre vínculo A (P1,P3) y vínculo B (P2,P4) ---\nfunction generarOrdenIntermitente(len) {\n    // Vínculo A: P1 (0), P3 (2)\n    let vinculoA = shuffle([0, 2]);\n    // Vínculo B: P2 (1), P4 (3)\n    let vinculoB = shuffle([1, 3]);\n\n    let orden = [];\n    let empiezaA = Math.random() < 0.5; // Decide quién arranca\n\n    while (orden.length < len && (vinculoA.length || vinculoB.length)) {\n        if (empiezaA) {\n            if (vinculoA.length) orden.push(vinculoA.shift());\n            if (orden.length >= len) break;\n            if (vinculoB.length) orden.push(vinculoB.shift());\n        } else {\n            if (vinculoB.length) orden.push(vinculoB.shift());\n            if (orden.length >= len) break;\n            if (vinculoA.length) orden.push(vinculoA.shift());\n        }\n    }\n    return orden.slice(0, len);\n}\n\nconst diasSemana = [\"domingo\", \"lunes\", \"martes\", \"miércoles\", \"jueves\", \"viernes\", \"sábado\"];\nconst mesesNombres = [\"Enero\", \"Febrero\", \"Marzo\", \"Abril\", \"Mayo\", \"Junio\", \"Julio\", \"Agosto\", \"Septiembre\", \"Octubre\", \"Noviembre\", \"Diciembre\"];\n\n// --- Flow variables ---\nlet area = flow.get('area') || \"\";\nlet CC = flow.get('CC') || [];\nlet IDs = flow.get('IDs') || [];\nlet nombresArray = flow.get('Nombres') || [];\nlet apellidosArray = flow.get('Apellidos') || []; // <-- ahora usamos Apellidos\nlet seqA = flow.get('secuenciaMongoA') || [];\nlet mesesProgramar = flow.get('mesesProgramar') || 1;\n\nif (seqA.length !== 28) {\n    node.error(\"Secuencia A debe tener 28 elementos.\");\n    return msg;\n}\nnombresArray = nombresArray.map(unwrapValue);\napellidosArray = apellidosArray.map(unwrapValue);\n\n// --- Calcular semana actual y semana de inicio ---\nlet fechaActual = new Date();\nlet semanaActual = getISOWeek(fechaActual);\nlet semanaInicio = semanaActual + 1;\n\n// --- Función para obtener el lunes de una semana ISO ---\nfunction getDateOfISOWeek(w, y) {\n    let date = new Date(y, 0, 1 + (w - 1) * 7);\n    let day = date.getDay();\n    let diff = date.getDate() - day + (day === 0 ? -6 : 1);\n    return new Date(date.setDate(diff));\n}\n\n// --- Calcular el lunes de la semana de inicio ---\nlet yearForStart = fechaActual.getFullYear();\nlet startDate = getDateOfISOWeek(semanaInicio, yearForStart);\nif (startDate.getFullYear() < yearForStart) {\n    yearForStart++;\n    startDate = getDateOfISOWeek(semanaInicio, yearForStart);\n}\n\n// --- Calcular la fecha de fin ---\nlet endMonthDate = new Date();\nendMonthDate.setMonth(fechaActual.getMonth() + mesesProgramar);\nlet lastDayOfMonth = new Date(endMonthDate.getFullYear(), endMonthDate.getMonth() + 1, 0);\nlet lastSunday = new Date(lastDayOfMonth);\nlastSunday.setDate(lastDayOfMonth.getDate() + (6 - lastDayOfMonth.getDay()));\n\n// --- Generar todas las fechas entre startDate y lastSunday ---\nlet fechas = [];\nlet currentDate = new Date(startDate);\nwhile (currentDate <= lastSunday) {\n    fechas.push(new Date(currentDate));\n    currentDate.setDate(currentDate.getDate() + 1);\n}\n\n// --- Obtener las semanas únicas y ordenadas ---\nlet semanasSet = new Set();\nfechas.forEach(fecha => {\n    let semanaFecha = getISOWeek(fecha);\n    if (semanaFecha >= semanaInicio) {\n        semanasSet.add(semanaFecha);\n    }\n});\n/* let semanasOrden = [...semanasSet].sort((a, b) => a - b); */\n\n// Asegurar unicidad\nlet uniq = new Map();\nfechas.forEach(d => {\n    let k = d.toISOString().split('T')[0];\n    if (!uniq.has(k)) uniq.set(k, new Date(d));\n});\nfechas = [...uniq.values()];\n\n// Ordenar fechas\nfechas.sort((a, b) => a - b);\n\n// Preparar semanas ordenadas\nlet semanasOrden = [...semanasSet].sort((a, b) => a - b);\n\n// --- Procesamiento por persona ---\nlet creadoEn = getLocalISOString(), resultado = [];\nlet grupos = Math.ceil(IDs.length / 4);\nlet semanasOriginal = [seqA.slice(0, 7), seqA.slice(7, 14), seqA.slice(14, 21), seqA.slice(21, 28)];\n\nfor (let g = 0; g < grupos; g++) {\n    let base = g * 4, end = Math.min(base + 4, IDs.length);\n    let idxs = Array.from({ length: end - base }, (_, i) => base + i);\n\n    // --- Generar rotación intermitente ---\n    let rot = generarOrdenIntermitente(idxs.length);\n\n    idxs.forEach((i, j) => {\n        let r = rot[j];\n        let cyc = [].concat(...[\n            semanasOriginal[r % 4],\n            semanasOriginal[(r + 1) % 4],\n            semanasOriginal[(r + 2) % 4],\n            semanasOriginal[(r + 3) % 4]\n        ]);\n\n        let calendario = fechas.map((d, idx) => ({\n            fecha: d,\n            turno: cyc[idx % 28].turno\n        }));\n\n        let mapS = {};\n        calendario.forEach(c => {\n            let sem = getISOWeek(c.fecha);\n            let key = `semana${sem}`;\n            if (!mapS[key]) mapS[key] = [];\n            if (!mapS[key].some(x => x.fecha.getTime() === c.fecha.getTime()))\n                mapS[key].push(c);\n        });\n\n        let semanasPersona = {};\n        for (let sem of semanasOrden) {\n            let key = `semana${sem}`;\n            let dias = mapS[key] || [];\n            if (dias.length === 7) {\n                semanasPersona[key] = dias.map(c => {\n                    let d = c.fecha;\n                    let nn = d.getDay();\n                    let f = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;\n                    return { [diasSemana[nn]]: c.turno, fecha: f };\n                });\n            }\n        }\n\n        resultado.push({\n            id: unwrapValue(IDs[i]),\n            cc: unwrapValue(CC[i]),\n            area,\n            nombres: combineName(nombresArray[i], apellidosArray[i]),\n            bloque: \"P\" + (r + 1),\n            creadoEn,\n            semanas: semanasPersona\n        });\n    });\n}\n\n// --- Resultado final ---\nmsg.payload = { creadoEn, registros: resultado };\nflow.set(\"Turno\", resultado);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "57631fb80fdde6a1"
+            ]
+        ]
+    },
+    {
+        "id": "1a97448feb28ecb8",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Db_SecuenciaA",
+        "collection": "(SFTR)_SecuenciaA",
+        "operation": "find.toArray",
+        "x": 600,
+        "y": 260,
+        "wires": [
+            [
+                "1637068d5dc7f2ac"
+            ]
+        ]
+    },
+    {
+        "id": "1637068d5dc7f2ac",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 33",
+        "func": "// Con Object.values(...) convertimos las propiedades \"0\",\"1\",\"2\",... en un array\nlet arrayReal = Object.values(msg.payload);\n\n// Guardamos el array real en flow context\nflow.set('secuenciaMongoA', arrayReal);\n\nreturn msg; // devolvemos el mensaje\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 260,
+        "wires": [
+            [
+                "435e1ed664355a21"
+            ]
+        ]
+    },
+    {
+        "id": "5b20a97b44f7acd7",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 34",
+        "func": "// Con Object.values(...) convertimos las propiedades \"0\",\"1\",\"2\",... en un array\nlet arrayReal = Object.values(msg.payload);\n\n// Guardamos el array real en flow context\nflow.set('secuenciaMongoB', arrayReal);\nflow.set('mesesProgramar', 2);\n\nreturn msg; // devolvemos el mensaje\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "03a87068838526bf"
+            ]
+        ]
+    },
+    {
+        "id": "435e1ed664355a21",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 36",
+        "func": "// Si tu nodo MongoDB usa msg.payload\nmsg.payload = {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 260,
+        "wires": [
+            [
+                "5326d529b665f53b"
+            ]
+        ]
+    },
+    {
+        "id": "2eed1df3b53b6dc4",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Historial Programacion MDB",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "insertOne",
+        "x": 420,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e8d1b671816f82a5",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Consulta (repeticiones)",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "find.toArray",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "4a68c8ba91fbd0cf"
+            ]
+        ]
+    },
+    {
+        "id": "4ae3d5c008b09af3",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 40",
+        "func": "// Suponemos que msg.payload es el array final con todos los registros de empleados\nlet registros = msg.payload;\nlet area = flow.get(\"area\");\n\n// Creamos un objeto único que agrupe esos registros, por ejemplo:\nlet documento = {\n    creadoEn: new Date().toISOString(),\n    area_programada: area,\n    registros: registros\n};\n\n// Asignamos el objeto al msg.payload para enviarlo a MongoDB\nmsg.payload = documento;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "2eed1df3b53b6dc4",
+                "2053814b2e8ba74f"
+            ]
+        ]
+    },
+    {
+        "id": "4a68c8ba91fbd0cf",
+        "type": "switch",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "9457fe23a5cbd0d4",
+                "9045d0fc77933b8a"
+            ],
+            [
+                "9045d0fc77933b8a"
+            ]
+        ]
+    },
+    {
+        "id": "57631fb80fdde6a1",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 41",
+        "func": "// En un nodo function antes del mongodb3 in\nlet area = flow.get(\"area\");; // El área que necesitas filtrar\n// Obtén el área de forma dinámica\nconst fechaActual = new Date();\nconst hace170Dias = new Date();\n/* hace170Dias.setDate(hace170Dias.getDate() - 170); */ // <-- RESTA 14 días\n\n// Payload con filtro por área y fecha\nmsg.payload = {\n  \"registros.area\": area,\n  \"creadoEn\": {\n    \"$gte\": hace170Dias.toISOString(),\n    \"$lte\": fechaActual.toISOString()\n  }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "e8d1b671816f82a5"
+            ]
+        ]
+    },
+    {
+        "id": "9045d0fc77933b8a",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 42",
+        "func": "let data = flow.get(\"Turno\");  // Esto debería ser el array 'resultado'\nmsg.payload = data;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "a4671f2baac0edfd",
+                "4ae3d5c008b09af3"
+            ]
+        ]
+    },
+    {
+        "id": "4009da9374feb3ec",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Response back",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9457fe23a5cbd0d4",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 43",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "4009da9374feb3ec"
+            ]
+        ]
+    },
+    {
+        "id": "2053814b2e8ba74f",
+        "type": "debug",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "debug 69",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "e1f010d6c4183550",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Subgrupos",
+        "url": "/Cambio_Secuecnia",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "58e2a8eccfaf647e"
+            ]
+        ]
+    },
+    {
+        "id": "58e2a8eccfaf647e",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Inicializador",
+        "func": "// Validar entrada\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Payload debe ser array de cambios\", msg);\n    return null;\n}\n\n// Si no hay cambios, responder inmediatamente\nif (msg.payload.length === 0) {\n    return {\n        payload: {\n            status: \"completed\",\n            totalProcessed: 0,\n            successful: 0,\n            failed: 0,\n            changes: []\n        },\n        res: msg.res,\n        req: msg.req,\n        _msgid: msg._msgid\n    };\n}\n\n// Preparar cambios con índice\nconst cambiosConIndice = msg.payload.map((cambio, idx) => ({\n    ...cambio,\n    index: idx,\n    cambiadoPor: cambio.cambiadoPor || 'Sistema'\n}));\n\n// Guardar en contexto de flujo\nflow.set('cambios', cambiosConIndice);\nflow.set('resultados', new Array(cambiosConIndice.length).fill(null));\nflow.set('contador', 0);\nflow.set('msgOriginal', {\n    _msgid: msg._msgid,\n    req: msg.req,\n    res: msg.res\n});\n\n// Enviar primer cambio\nreturn {\n    payload: cambiosConIndice[0],\n    _msgid: msg._msgid\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "40d3f0345eceb972"
+            ]
+        ]
+    },
+    {
+        "id": "40d3f0345eceb972",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Crear query MongoDB",
+        "func": "// Guardar datos originales\nmsg.datos = {\n    cc: msg.payload.cc,\n    semana: msg.payload.semana,\n    dia: msg.payload.dia,\n    nuevoTurno: msg.payload.nuevoTurno,\n    cambiadoPor: msg.payload.cambiadoPor,\n    index: msg.payload.index\n};\n\n// Crear query de búsqueda\nmsg.payload = {\n    \"registros.cc\": msg.datos.cc,\n    [`registros.semanas.${msg.datos.semana}`]: { $exists: true }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "302a56a224e12733"
+            ]
+        ]
+    },
+    {
+        "id": "302a56a224e12733",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Buscar documento",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "findOne",
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "6903ac56a4979d59"
+            ]
+        ]
+    },
+    {
+        "id": "6903ac56a4979d59",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Procesar documento",
+        "func": "// Validar datos\nif (!msg.datos || !msg.payload) {\n    node.error(\"Datos o documento faltante\", msg);\n    return null;\n}\n\nconst { cc, semana, dia, nuevoTurno } = msg.datos;\nconst documento = msg.payload;\n\n// Buscar registro del empleado\nconst registro = documento.registros.find(r => r.cc === cc);\nif (!registro) {\n    node.error(`Registro no encontrado para CC: ${cc}`, msg);\n    return null;\n}\n\n// Verificar si existe la semana\nif (!registro.semanas || !registro.semanas[semana]) {\n    node.error(`Semana ${semana} no existe en el registro`, msg);\n    return null;\n}\n\n// Obtener posición del día\nconst dias = [\"lunes\", \"martes\", \"miércoles\", \"jueves\", \"viernes\", \"sábado\", \"domingo\"];\nconst diaLower = dia.toLowerCase();\nconst posicion = dias.indexOf(diaLower);\nif (posicion === -1) {\n    node.error(`Día ${dia} no válido`, msg);\n    return null;\n}\n\n// Obtener el array de la semana\nconst semanaArray = registro.semanas[semana];\nif (posicion >= semanaArray.length) {\n    node.error(`Posición ${posicion} para día ${dia} excede la longitud de la semana`, msg);\n    return null;\n}\n\n// Obtener objeto del día\nconst diaObj = semanaArray[posicion];\nconst valorAnterior = diaObj[diaLower] || \"\";\n\n// Actualizar el valor\ndiaObj[diaLower] = nuevoTurno;\n\n// Preparar mensajes de salida\nconst msgActualizar = {\n    payload: documento,\n    datos: {\n        ...msg.datos,\n        valorAnterior: valorAnterior\n    },\n    _msgid: msg._msgid\n};\n\nconst msgLog = {\n    payload: {\n        cc: cc,\n        semana: semana,\n        dia: dia,\n        nuevoTurno: nuevoTurno,\n        cambiadoPor: msg.datos.cambiadoPor,\n        valorAnterior: valorAnterior\n    },\n    _msgid: msg._msgid\n};\n\nreturn [msgActualizar, msgLog];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 860,
+        "y": 580,
+        "wires": [
+            [
+                "047788443c6281bf"
+            ],
+            [
+                "18e9732c033c3948"
+            ]
+        ]
+    },
+    {
+        "id": "047788443c6281bf",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Preparar actualización",
+        "func": "// Usar replaceOne: necesitamos el filtro y el documento completo\nconst datos = msg.datos;\n\nif (!datos) {\n    node.error(\"Faltan datos para la actualización\", msg);\n    return null;\n}\n\n// Construir el filtro\nconst filtro = {\n    \"registros.cc\": datos.cc,\n    [`registros.semanas.${datos.semana}`]: { $exists: true }\n};\n\nmsg.payload = [filtro, msg.payload]; // [filtro, documento]\nmsg.datos = datos; // Mantener los datos\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 620,
+        "wires": [
+            [
+                "7168e30af840e06b"
+            ]
+        ]
+    },
+    {
+        "id": "7168e30af840e06b",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Actualizar documento",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "replaceOne",
+        "x": 660,
+        "y": 620,
+        "wires": [
+            [
+                "dd05a9e2845230b2"
+            ]
+        ]
+    },
+    {
+        "id": "dd05a9e2845230b2",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Procesar resultado",
+        "func": "// Obtener contexto\nconst resultados = flow.get('resultados') || [];\nconst cambios = flow.get('cambios') || [];\nconst contador = flow.get('contador') || 0;\nconst index = msg.datos.index;\n\n// Verificar resultado de MongoDB\nconst exito = msg.payload && (msg.payload.modifiedCount > 0 || msg.payload.matchedCount > 0);\n\n// Registrar resultado\nresultados[index] = {\n    success: exito,\n    cc: msg.datos.cc,\n    semana: msg.datos.semana,\n    dia: msg.datos.dia,\n    nuevoTurno: msg.datos.nuevoTurno,\n    cambiadoPor: msg.datos.cambiadoPor,\n    error: exito ? null : \"No se modificó ningún documento\"\n};\n\nflow.set('resultados', resultados);\n\n// Incrementar contador\nconst nuevoContador = contador + 1;\nflow.set('contador', nuevoContador);\n\n// Verificar si hay más cambios\nif (nuevoContador < cambios.length) {\n    // Enviar siguiente cambio\n    return [{\n        payload: cambios[nuevoContador],\n        _msgid: flow.get('msgOriginal')._msgid\n    }];\n}\n\n// No hay más cambios, preparar respuesta final\nconst msgOriginal = flow.get('msgOriginal');\nconst response = {\n    _msgid: msgOriginal._msgid,\n    req: msgOriginal.req,\n    res: msgOriginal.res,\n    statusCode: 200,\n    headers: { \"Content-Type\": \"application/json\" },\n    payload: {\n        status: \"completed\",\n        totalProcessed: cambios.length,\n        successful: resultados.filter(r => r && r.success).length,\n        failed: resultados.filter(r => r && !r.success).length,\n        changes: resultados\n    }\n};\n\n// Limpiar contexto\nflow.set('cambios', null);\nflow.set('resultados', null);\nflow.set('contador', null);\nflow.set('msgOriginal', null);\n\nreturn [null, response];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 860,
+        "y": 620,
+        "wires": [
+            [
+                "40d3f0345eceb972"
+            ],
+            [
+                "8e5c9a43de965eb2"
+            ]
+        ]
+    },
+    {
+        "id": "18e9732c033c3948",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Preparar log",
+        "func": "// Crear objeto de log\nconst datos = msg.payload;\nconst now = new Date();\n\nmsg.payload = {\n    cedula: datos.cc,\n    semana: datos.semana,\n    dia: datos.dia,\n    cambiadoPor: datos.cambiadoPor || 'Sistema',\n    fechaRegistro: now.toISOString(),\n    comparativo: {\n        turno: {\n            anterior: datos.valorAnterior || \"\",\n            nuevo: datos.nuevoTurno || \"\"\n        }\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 580,
+        "wires": [
+            [
+                "63352a48c71fa270"
+            ]
+        ]
+    },
+    {
+        "id": "63352a48c71fa270",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Guardar log",
+        "collection": "(SFTR)_Registro_de_Novedades",
+        "operation": "insertOne",
+        "x": 1210,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e5c9a43de965eb2",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 1020,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5470362400173944",
+        "type": "comment",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "Conexión PowerBI con MongoDB",
+        "info": "",
+        "x": 230,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "56b4ef39e114983e",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Conexion DB (Historial Programacion)",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "find.toArray",
+        "x": 570,
+        "y": 780,
+        "wires": [
+            [
+                "05502513d5fe4a18"
+            ]
+        ]
+    },
+    {
+        "id": "90b857e36a38b860",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "Llamdo de powerBI",
+        "url": "/DatosMongoDB",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "a9ba996b6e10da86"
+            ]
+        ]
+    },
+    {
+        "id": "05502513d5fe4a18",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a9ba996b6e10da86",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "function 57",
+        "func": "const fechaActual = new Date();\nconst anio = fechaActual.getFullYear();\nconst mes = fechaActual.getMonth(); // Enero = 0, Diciembre = 11\n\nlet inicioSemestre, finSemestre;\n\nif(mes < 6) {  \n    // Primer semestre: de 1 de enero a 30 de junio\n    inicioSemestre = new Date(anio, 0, 1);\n    // new Date(anio, 6, 0) devuelve el último día de junio\n    finSemestre = new Date(anio, 6, 0);  \n} else {\n    // Segundo semestre: de 1 de julio a 31 de diciembre\n    inicioSemestre = new Date(anio, 6, 1);\n    // new Date(anio, 12, 0) devuelve el último día de diciembre\n    finSemestre = new Date(anio, 12, 0);\n}\n\n// Asignamos el payload con el filtro por fecha\nmsg.payload = { \n  /* \"creadoEn\": {\n    \"$gte\": inicioSemestre.toISOString(),\n    \"$lte\": finSemestre.toISOString()\n  } */\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 780,
+        "wires": [
+            [
+                "56b4ef39e114983e"
+            ]
+        ]
+    },
+    {
+        "id": "a52c3c78b8116a62",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "e9ab4188f0402b80",
+        "name": "function 2",
+        "func": "context.keys().forEach(key => context.set(key, undefined));\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 940,
+        "wires": [
+            [
+                "4d181f2debb0faa0"
+            ]
+        ]
+    },
+    {
+        "id": "be88bd9cb523fcf5",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "e9ab4188f0402b80",
+        "name": "function 3",
+        "func": "flow.keys().forEach(key => flow.set(key, undefined));\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 980,
+        "wires": [
+            [
+                "4d181f2debb0faa0"
+            ]
+        ]
+    },
+    {
+        "id": "8f8da2eef49e7117",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "e9ab4188f0402b80",
+        "name": "function 4",
+        "func": "global.keys().forEach(key => global.set(key, undefined));\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1020,
+        "wires": [
+            [
+                "4d181f2debb0faa0"
+            ]
+        ]
+    },
+    {
+        "id": "732099a9aac44933",
+        "type": "inject",
+        "z": "444c6d87b9487637",
+        "g": "e9ab4188f0402b80",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * 1,5",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 980,
+        "wires": [
+            [
+                "a52c3c78b8116a62",
+                "be88bd9cb523fcf5",
+                "8f8da2eef49e7117"
+            ]
+        ]
+    },
+    {
+        "id": "4d181f2debb0faa0",
+        "type": "debug",
+        "z": "444c6d87b9487637",
+        "g": "e9ab4188f0402b80",
+        "name": "debug 53",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "53a7dd6801c6f91c",
+        "type": "mongodb4",
+        "z": "444c6d87b9487637",
+        "clientNode": "6ac527d6c1b2e1c8",
+        "mode": "collection",
+        "collection": "On-Off-Bordgin",
+        "operation": "find",
+        "output": "toArray",
+        "maxTimeMS": "0",
+        "handleDocId": false,
+        "name": "",
+        "x": 1190,
+        "y": 960,
+        "wires": [
+            [
+                "942661cd9fe5ebf7"
+            ]
+        ]
+    },
+    {
+        "id": "942661cd9fe5ebf7",
+        "type": "debug",
+        "z": "444c6d87b9487637",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "9945ec9aec7cb0e0",
+        "type": "inject",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "object",
+        "payloadType": "date",
+        "x": 900,
+        "y": 960,
+        "wires": [
+            [
+                "7c5cd84e5d5de3f7"
+            ]
+        ]
+    },
+    {
+        "id": "7c5cd84e5d5de3f7",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "name": "function 50",
+        "func": "msg.payload={\n    estado:\"Activo\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 960,
+        "wires": [
+            [
+                "53a7dd6801c6f91c"
+            ]
+        ]
+    },
+    {
+        "id": "47900b912e8f84ca",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "d": true,
+        "g": "40f408cd831a6034",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "LoginSFT",
+        "collection": "LoginSFT",
+        "operation": "find.toArray",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0bbf5536147a52f9",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 52",
+        "func": "// Extraer los datos de la propiedad \"value\" si existe\nlet data = msg.payload;\n\nif (data && data.value && Array.isArray(data.value)) {\n    data = data.value;\n}\n\n// Si el payload no es un array, convertir si es objeto\nif (!Array.isArray(data) && typeof data === \"object\") {\n    data = Object.values(data);\n}\n\nif (Array.isArray(data)) {\n    node.warn(data);\n\n    msg.payload = data.map(item => {\n        let areas = [];\n        if (item.Areas && Array.isArray(item.Areas)) {\n            areas = [...item.Areas];\n        }\n\n        return {\n            username: item.Title || \"\",             // usuario en SharePoint\n            password: item.password || \"\",\n            full_name: item.NombreCompleto || \"\",  // nombre completo\n            correo: item.correo || \"\",             // si existe\n            Areas: areas,\n            document: item.Cedula || null          // cédula\n        };\n    });\n} else {\n    msg.payload = [];\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "2bf71a5434deb421"
+            ]
+        ]
+    },
+    {
+        "id": "2bf71a5434deb421",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "function 53",
+        "func": "let user = flow.get(\"user\");\nlet password = flow.get(\"password\");\n\n// Asegurarnos que payload sea array\nif (!Array.isArray(msg.payload)) {\n    msg.statusCode = 500;\n    msg.payload = \"Error: Formato de datos inválido\";\n    return msg;\n}\n\n// Buscar usuario\nconst userFound = msg.payload.find(item =>\n    item.username === user && item.password === password\n);\n\nif (userFound) {\n    msg.statusCode = 200;\n    msg.payload = {\n        nombre: userFound.full_name || userFound.username,\n        correo: userFound.correo || \"\",\n        Areas: userFound.Areas || [],\n        Cedula: userFound.document || null\n    };\n} else {\n    msg.statusCode = 401;\n    msg.payload = \"Usuario o contraseña incorrectos\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 100,
+        "wires": [
+            [
+                "6c2cbeaa584a8107"
+            ]
+        ]
+    },
+    {
+        "id": "trigger",
+        "type": "inject",
+        "z": "444c6d87b9487637",
+        "name": "Solicitar datos",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1290,
+        "y": 140,
+        "wires": [
+            [
+                "request"
+            ]
+        ]
+    },
+    {
+        "id": "request",
+        "type": "http request",
+        "z": "444c6d87b9487637",
+        "name": "PowerAutomate API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://default628717ef459543e4a72ff0884921a8.97.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1f06b098301546ae9ad66c695827bd09/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WTaJKMgolx4I9ppRws_1NyTRCMMWeeKEDBgo59UCNQc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 1480,
+        "y": 140,
+        "wires": [
+            [
+                "380ff00cc05f2da8"
+            ]
+        ]
+    },
+    {
+        "id": "380ff00cc05f2da8",
+        "type": "debug",
+        "z": "444c6d87b9487637",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1660,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c4858ccb4fc19d50",
+        "type": "http request",
+        "z": "444c6d87b9487637",
+        "g": "40f408cd831a6034",
+        "name": "PowerAutomate API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://default628717ef459543e4a72ff0884921a8.97.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1f06b098301546ae9ad66c695827bd09/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WTaJKMgolx4I9ppRws_1NyTRCMMWeeKEDBgo59UCNQc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": true,
+        "headers": [],
+        "x": 460,
+        "y": 100,
+        "wires": [
+            [
+                "0bbf5536147a52f9"
+            ]
+        ]
+    },
+    {
+        "id": "016b70e765848f03",
+        "type": "nodeRedSharepoint-access",
+        "name": "Conexion SH"
+    },
+    {
+        "id": "231ca80c2cd7b9ce",
+        "type": "mongodb3",
+        "uri": "mongodb://admin:G3lc02025*@192.168.170.2:27017/MDB_Local?authSource=admin",
+        "name": "Mongo_Local_Serv",
+        "options": "",
+        "parallelism": -1
+    },
+    {
+        "id": "6ac527d6c1b2e1c8",
+        "type": "mongodb4-client",
+        "name": "MDB_Local_Serv",
+        "protocol": "mongodb",
+        "hostname": "192.168.170.2",
+        "port": "27017",
+        "dbName": "MDB_Local",
+        "appName": "",
+        "authSource": "admin",
+        "authMechanism": "DEFAULT",
+        "tls": false,
+        "tlsCAFile": "",
+        "tlsCertificateKeyFile": "",
+        "tlsInsecure": false,
+        "connectTimeoutMS": "30000",
+        "socketTimeoutMS": "30000",
+        "minPoolSize": "0",
+        "maxPoolSize": "100",
+        "maxIdleTimeMS": "0",
+        "uri": "mongodb://192.168.170.2:27017",
+        "advanced": "{}",
+        "uriTabActive": "tab-uri-simple"
+    }
+]

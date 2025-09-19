@@ -1,0 +1,114 @@
+[
+    {
+        "id": "80970f0e186f53ab",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Get para Programación",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#ffff7f",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "5470362400173944",
+            "56b4ef39e114983e",
+            "90b857e36a38b860",
+            "05502513d5fe4a18",
+            "a9ba996b6e10da86"
+        ],
+        "x": 34,
+        "y": 699,
+        "w": 832,
+        "h": 122
+    },
+    {
+        "id": "5470362400173944",
+        "type": "comment",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "Conexión PowerBI con MongoDB",
+        "info": "",
+        "x": 230,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "56b4ef39e114983e",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Conexion DB (Historial Programacion)",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "find.toArray",
+        "x": 570,
+        "y": 780,
+        "wires": [
+            [
+                "05502513d5fe4a18"
+            ]
+        ]
+    },
+    {
+        "id": "90b857e36a38b860",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "Llamdo de powerBI",
+        "url": "/DatosMongoDB",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "a9ba996b6e10da86"
+            ]
+        ]
+    },
+    {
+        "id": "05502513d5fe4a18",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 790,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "a9ba996b6e10da86",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "80970f0e186f53ab",
+        "name": "function 57",
+        "func": "const fechaActual = new Date();\nconst anio = fechaActual.getFullYear();\nconst mes = fechaActual.getMonth(); // Enero = 0, Diciembre = 11\n\nlet inicioSemestre, finSemestre;\n\nif(mes < 6) {  \n    // Primer semestre: de 1 de enero a 30 de junio\n    inicioSemestre = new Date(anio, 0, 1);\n    // new Date(anio, 6, 0) devuelve el último día de junio\n    finSemestre = new Date(anio, 6, 0);  \n} else {\n    // Segundo semestre: de 1 de julio a 31 de diciembre\n    inicioSemestre = new Date(anio, 6, 1);\n    // new Date(anio, 12, 0) devuelve el último día de diciembre\n    finSemestre = new Date(anio, 12, 0);\n}\n\n// Asignamos el payload con el filtro por fecha\nmsg.payload = { \n  /* \"creadoEn\": {\n    \"$gte\": inicioSemestre.toISOString(),\n    \"$lte\": finSemestre.toISOString()\n  } */\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 780,
+        "wires": [
+            [
+                "56b4ef39e114983e"
+            ]
+        ]
+    },
+    {
+        "id": "231ca80c2cd7b9ce",
+        "type": "mongodb3",
+        "uri": "mongodb://admin:G3lc02025*@192.168.170.2:27017/MDB_Local?authSource=admin",
+        "name": "Mongo_Local_Serv",
+        "options": "",
+        "parallelism": -1
+    }
+]

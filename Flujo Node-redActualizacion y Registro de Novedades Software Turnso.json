@@ -1,0 +1,236 @@
+[
+    {
+        "id": "f6df5c2af35c5f38",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Actualizacion y Registro de Novedades",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#7fb7df",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "e1f010d6c4183550",
+            "58e2a8eccfaf647e",
+            "40d3f0345eceb972",
+            "302a56a224e12733",
+            "6903ac56a4979d59",
+            "047788443c6281bf",
+            "7168e30af840e06b",
+            "dd05a9e2845230b2",
+            "18e9732c033c3948",
+            "63352a48c71fa270",
+            "8e5c9a43de965eb2"
+        ],
+        "x": 34,
+        "y": 539,
+        "w": 1272,
+        "h": 122
+    },
+    {
+        "id": "e1f010d6c4183550",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Subgrupos",
+        "url": "/Cambio_Secuecnia",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 580,
+        "wires": [
+            [
+                "58e2a8eccfaf647e"
+            ]
+        ]
+    },
+    {
+        "id": "58e2a8eccfaf647e",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Inicializador",
+        "func": "// Validar entrada\nif (!Array.isArray(msg.payload)) {\n    node.error(\"Payload debe ser array de cambios\", msg);\n    return null;\n}\n\n// Si no hay cambios, responder inmediatamente\nif (msg.payload.length === 0) {\n    return {\n        payload: {\n            status: \"completed\",\n            totalProcessed: 0,\n            successful: 0,\n            failed: 0,\n            changes: []\n        },\n        res: msg.res,\n        req: msg.req,\n        _msgid: msg._msgid\n    };\n}\n\n// Preparar cambios con índice\nconst cambiosConIndice = msg.payload.map((cambio, idx) => ({\n    ...cambio,\n    index: idx,\n    cambiadoPor: cambio.cambiadoPor || 'Sistema'\n}));\n\n// Guardar en contexto de flujo\nflow.set('cambios', cambiosConIndice);\nflow.set('resultados', new Array(cambiosConIndice.length).fill(null));\nflow.set('contador', 0);\nflow.set('msgOriginal', {\n    _msgid: msg._msgid,\n    req: msg.req,\n    res: msg.res\n});\n\n// Enviar primer cambio\nreturn {\n    payload: cambiosConIndice[0],\n    _msgid: msg._msgid\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 580,
+        "wires": [
+            [
+                "40d3f0345eceb972"
+            ]
+        ]
+    },
+    {
+        "id": "40d3f0345eceb972",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Crear query MongoDB",
+        "func": "// Guardar datos originales\nmsg.datos = {\n    cc: msg.payload.cc,\n    semana: msg.payload.semana,\n    dia: msg.payload.dia,\n    nuevoTurno: msg.payload.nuevoTurno,\n    cambiadoPor: msg.payload.cambiadoPor,\n    index: msg.payload.index\n};\n\n// Crear query de búsqueda\nmsg.payload = {\n    \"registros.cc\": msg.datos.cc,\n    [`registros.semanas.${msg.datos.semana}`]: { $exists: true }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "302a56a224e12733"
+            ]
+        ]
+    },
+    {
+        "id": "302a56a224e12733",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Buscar documento",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "findOne",
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "6903ac56a4979d59"
+            ]
+        ]
+    },
+    {
+        "id": "6903ac56a4979d59",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Procesar documento",
+        "func": "// Validar datos\nif (!msg.datos || !msg.payload) {\n    node.error(\"Datos o documento faltante\", msg);\n    return null;\n}\n\nconst { cc, semana, dia, nuevoTurno } = msg.datos;\nconst documento = msg.payload;\n\n// Buscar registro del empleado\nconst registro = documento.registros.find(r => r.cc === cc);\nif (!registro) {\n    node.error(`Registro no encontrado para CC: ${cc}`, msg);\n    return null;\n}\n\n// Verificar si existe la semana\nif (!registro.semanas || !registro.semanas[semana]) {\n    node.error(`Semana ${semana} no existe en el registro`, msg);\n    return null;\n}\n\n// Obtener posición del día\nconst dias = [\"lunes\", \"martes\", \"miércoles\", \"jueves\", \"viernes\", \"sábado\", \"domingo\"];\nconst diaLower = dia.toLowerCase();\nconst posicion = dias.indexOf(diaLower);\nif (posicion === -1) {\n    node.error(`Día ${dia} no válido`, msg);\n    return null;\n}\n\n// Obtener el array de la semana\nconst semanaArray = registro.semanas[semana];\nif (posicion >= semanaArray.length) {\n    node.error(`Posición ${posicion} para día ${dia} excede la longitud de la semana`, msg);\n    return null;\n}\n\n// Obtener objeto del día\nconst diaObj = semanaArray[posicion];\nconst valorAnterior = diaObj[diaLower] || \"\";\n\n// Actualizar el valor\ndiaObj[diaLower] = nuevoTurno;\n\n// Preparar mensajes de salida\nconst msgActualizar = {\n    payload: documento,\n    datos: {\n        ...msg.datos,\n        valorAnterior: valorAnterior\n    },\n    _msgid: msg._msgid\n};\n\nconst msgLog = {\n    payload: {\n        cc: cc,\n        semana: semana,\n        dia: dia,\n        nuevoTurno: nuevoTurno,\n        cambiadoPor: msg.datos.cambiadoPor,\n        valorAnterior: valorAnterior\n    },\n    _msgid: msg._msgid\n};\n\nreturn [msgActualizar, msgLog];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 860,
+        "y": 580,
+        "wires": [
+            [
+                "047788443c6281bf"
+            ],
+            [
+                "18e9732c033c3948"
+            ]
+        ]
+    },
+    {
+        "id": "047788443c6281bf",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Preparar actualización",
+        "func": "// Usar replaceOne: necesitamos el filtro y el documento completo\nconst datos = msg.datos;\n\nif (!datos) {\n    node.error(\"Faltan datos para la actualización\", msg);\n    return null;\n}\n\n// Construir el filtro\nconst filtro = {\n    \"registros.cc\": datos.cc,\n    [`registros.semanas.${datos.semana}`]: { $exists: true }\n};\n\nmsg.payload = [filtro, msg.payload]; // [filtro, documento]\nmsg.datos = datos; // Mantener los datos\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 460,
+        "y": 620,
+        "wires": [
+            [
+                "7168e30af840e06b"
+            ]
+        ]
+    },
+    {
+        "id": "7168e30af840e06b",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Actualizar documento",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "replaceOne",
+        "x": 660,
+        "y": 620,
+        "wires": [
+            [
+                "dd05a9e2845230b2"
+            ]
+        ]
+    },
+    {
+        "id": "dd05a9e2845230b2",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Procesar resultado",
+        "func": "// Obtener contexto\nconst resultados = flow.get('resultados') || [];\nconst cambios = flow.get('cambios') || [];\nconst contador = flow.get('contador') || 0;\nconst index = msg.datos.index;\n\n// Verificar resultado de MongoDB\nconst exito = msg.payload && (msg.payload.modifiedCount > 0 || msg.payload.matchedCount > 0);\n\n// Registrar resultado\nresultados[index] = {\n    success: exito,\n    cc: msg.datos.cc,\n    semana: msg.datos.semana,\n    dia: msg.datos.dia,\n    nuevoTurno: msg.datos.nuevoTurno,\n    cambiadoPor: msg.datos.cambiadoPor,\n    error: exito ? null : \"No se modificó ningún documento\"\n};\n\nflow.set('resultados', resultados);\n\n// Incrementar contador\nconst nuevoContador = contador + 1;\nflow.set('contador', nuevoContador);\n\n// Verificar si hay más cambios\nif (nuevoContador < cambios.length) {\n    // Enviar siguiente cambio\n    return [{\n        payload: cambios[nuevoContador],\n        _msgid: flow.get('msgOriginal')._msgid\n    }];\n}\n\n// No hay más cambios, preparar respuesta final\nconst msgOriginal = flow.get('msgOriginal');\nconst response = {\n    _msgid: msgOriginal._msgid,\n    req: msgOriginal.req,\n    res: msgOriginal.res,\n    statusCode: 200,\n    headers: { \"Content-Type\": \"application/json\" },\n    payload: {\n        status: \"completed\",\n        totalProcessed: cambios.length,\n        successful: resultados.filter(r => r && r.success).length,\n        failed: resultados.filter(r => r && !r.success).length,\n        changes: resultados\n    }\n};\n\n// Limpiar contexto\nflow.set('cambios', null);\nflow.set('resultados', null);\nflow.set('contador', null);\nflow.set('msgOriginal', null);\n\nreturn [null, response];",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 860,
+        "y": 620,
+        "wires": [
+            [
+                "40d3f0345eceb972"
+            ],
+            [
+                "8e5c9a43de965eb2"
+            ]
+        ]
+    },
+    {
+        "id": "18e9732c033c3948",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Preparar log",
+        "func": "// Crear objeto de log\nconst datos = msg.payload;\nconst now = new Date();\n\nmsg.payload = {\n    cedula: datos.cc,\n    semana: datos.semana,\n    dia: datos.dia,\n    cambiadoPor: datos.cambiadoPor || 'Sistema',\n    fechaRegistro: now.toISOString(),\n    comparativo: {\n        turno: {\n            anterior: datos.valorAnterior || \"\",\n            nuevo: datos.nuevoTurno || \"\"\n        }\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 580,
+        "wires": [
+            [
+                "63352a48c71fa270"
+            ]
+        ]
+    },
+    {
+        "id": "63352a48c71fa270",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Guardar log",
+        "collection": "(SFTR)_Registro_de_Novedades",
+        "operation": "insertOne",
+        "x": 1210,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e5c9a43de965eb2",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "f6df5c2af35c5f38",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 1020,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "231ca80c2cd7b9ce",
+        "type": "mongodb3",
+        "uri": "mongodb://admin:G3lc02025*@192.168.170.2:27017/MDB_Local?authSource=admin",
+        "name": "Mongo_Local_Serv",
+        "options": "",
+        "parallelism": -1
+    }
+]

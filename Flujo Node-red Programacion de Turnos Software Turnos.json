@@ -1,0 +1,424 @@
+[
+    {
+        "id": "d39c2fd81421091d",
+        "type": "group",
+        "z": "444c6d87b9487637",
+        "name": "Flujo Programación de Turnos",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#addb7b",
+            "label": true,
+            "label-position": "n",
+            "color": "#000000"
+        },
+        "nodes": [
+            "a4671f2baac0edfd",
+            "02034ca2236a889f",
+            "2f0ef58ad8eefa29",
+            "5326d529b665f53b",
+            "b8ec7fa15cc8818c",
+            "03a87068838526bf",
+            "1a97448feb28ecb8",
+            "1637068d5dc7f2ac",
+            "5b20a97b44f7acd7",
+            "435e1ed664355a21",
+            "2eed1df3b53b6dc4",
+            "e8d1b671816f82a5",
+            "4ae3d5c008b09af3",
+            "4a68c8ba91fbd0cf",
+            "57631fb80fdde6a1",
+            "9045d0fc77933b8a",
+            "4009da9374feb3ec",
+            "9457fe23a5cbd0d4",
+            "2053814b2e8ba74f"
+        ],
+        "x": 34,
+        "y": 219,
+        "w": 992,
+        "h": 302
+    },
+    {
+        "id": "a4671f2baac0edfd",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Response back",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 780,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "02034ca2236a889f",
+        "type": "http in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Subgrupos",
+        "url": "/calcularTurnos",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "2f0ef58ad8eefa29"
+            ]
+        ]
+    },
+    {
+        "id": "2f0ef58ad8eefa29",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 30",
+        "func": "// Guardar CC (cedulas)\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('CC', msg.payload.map(e => e.cedula));\n} else {\n    flow.set('CC', []);\n}\n\n// Guardar IDs (puedes usar _id si lo necesitas)\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('IDs', msg.payload.map(e => e._id));\n} else {\n    flow.set('IDs', []);\n}\n\n// Guardar Nombres\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('Nombres', msg.payload.map(e => e.nombre));\n} else {\n    flow.set('Nombres', []);\n}\n\nif (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    flow.set('Apellidos', msg.payload.map(e => e.apellidos));\n} else {\n    flow.set('Apellidos', []);\n}\n\n// Guardar área desde el primer elemento\nif (Array.isArray(msg.payload) && msg.payload.length > 0 && msg.payload[0].area) {\n    flow.set('area', msg.payload[0].area);\n} else {\n    flow.set('area', null);\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "b8ec7fa15cc8818c"
+            ]
+        ]
+    },
+    {
+        "id": "5326d529b665f53b",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Db_SecuenciaB",
+        "collection": "(SFTR)_SecuenciaB",
+        "operation": "find.toArray",
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "5b20a97b44f7acd7"
+            ]
+        ]
+    },
+    {
+        "id": "b8ec7fa15cc8818c",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 31",
+        "func": "// Si tu nodo MongoDB usa msg.payload\nmsg.payload = {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "1a97448feb28ecb8"
+            ]
+        ]
+    },
+    {
+        "id": "03a87068838526bf",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 32",
+        "func": "/* node.warn({\n    area: flow.get('area'),\n    CC: flow.get('CC'),\n    IDs: flow.get('IDs'),\n    Nombres: flow.get('Nombres'),\n    Apellidos: flow.get('Apellidos')\n}); */\n// --- Utils ---\nfunction unwrapValue(obj) {\n    if (!obj) return \"\";\n    if (obj && typeof obj === \"object\" && obj.Value !== undefined) {\n        let inner = obj.Value.Value !== undefined ? obj.Value.Value : obj.Value;\n        return String(inner || \"\");\n    }\n    return String(obj);\n}\n\nfunction getLocalISOString() {\n    let now = new Date(), off = now.getTimezoneOffset();\n    now.setMinutes(now.getMinutes() - off);\n    return now.toISOString().replace('Z', '');\n}\n\nfunction shuffle(arr) {\n    let a = [...arr];\n    for (let i = a.length - 1; i > 0; i--) {\n        let j = Math.floor(Math.random() * (i + 1));\n        [a[i], a[j]] = [a[j], a[i]];\n    }\n    return a;\n}\n\nfunction getISOWeek(d) {\n    let date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));\n    let day = date.getUTCDay() || 7;\n    date.setUTCDate(date.getUTCDate() + 4 - day);\n    let start = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));\n    return Math.ceil((((date.getTime() - start.getTime()) / 86400000) + 1) / 7);\n}\n\n// --- Combina nombre y apellido sin dejar espacios sobrantes ---\nfunction combineName(nombre, apellido) {\n    nombre = (nombre || \"\").trim();\n    apellido = (apellido || \"\").trim();\n    if (nombre && apellido) return nombre + \" \" + apellido;\n    if (nombre) return nombre;\n    return apellido || \"\";\n}\n\n// --- Genera orden intermitente: alterna entre vínculo A (P1,P3) y vínculo B (P2,P4) ---\nfunction generarOrdenIntermitente(len) {\n    // Vínculo A: P1 (0), P3 (2)\n    let vinculoA = shuffle([0, 2]);\n    // Vínculo B: P2 (1), P4 (3)\n    let vinculoB = shuffle([1, 3]);\n\n    let orden = [];\n    let empiezaA = Math.random() < 0.5; // Decide quién arranca\n\n    while (orden.length < len && (vinculoA.length || vinculoB.length)) {\n        if (empiezaA) {\n            if (vinculoA.length) orden.push(vinculoA.shift());\n            if (orden.length >= len) break;\n            if (vinculoB.length) orden.push(vinculoB.shift());\n        } else {\n            if (vinculoB.length) orden.push(vinculoB.shift());\n            if (orden.length >= len) break;\n            if (vinculoA.length) orden.push(vinculoA.shift());\n        }\n    }\n    return orden.slice(0, len);\n}\n\nconst diasSemana = [\"domingo\", \"lunes\", \"martes\", \"miércoles\", \"jueves\", \"viernes\", \"sábado\"];\nconst mesesNombres = [\"Enero\", \"Febrero\", \"Marzo\", \"Abril\", \"Mayo\", \"Junio\", \"Julio\", \"Agosto\", \"Septiembre\", \"Octubre\", \"Noviembre\", \"Diciembre\"];\n\n// --- Flow variables ---\nlet area = flow.get('area') || \"\";\nlet CC = flow.get('CC') || [];\nlet IDs = flow.get('IDs') || [];\nlet nombresArray = flow.get('Nombres') || [];\nlet apellidosArray = flow.get('Apellidos') || []; // <-- ahora usamos Apellidos\nlet seqA = flow.get('secuenciaMongoA') || [];\nlet mesesProgramar = flow.get('mesesProgramar') || 1;\n\nif (seqA.length !== 28) {\n    node.error(\"Secuencia A debe tener 28 elementos.\");\n    return msg;\n}\nnombresArray = nombresArray.map(unwrapValue);\napellidosArray = apellidosArray.map(unwrapValue);\n\n// --- Calcular semana actual y semana de inicio ---\nlet fechaActual = new Date();\nlet semanaActual = getISOWeek(fechaActual);\nlet semanaInicio = semanaActual + 1;\n\n// --- Función para obtener el lunes de una semana ISO ---\nfunction getDateOfISOWeek(w, y) {\n    let date = new Date(y, 0, 1 + (w - 1) * 7);\n    let day = date.getDay();\n    let diff = date.getDate() - day + (day === 0 ? -6 : 1);\n    return new Date(date.setDate(diff));\n}\n\n// --- Calcular el lunes de la semana de inicio ---\nlet yearForStart = fechaActual.getFullYear();\nlet startDate = getDateOfISOWeek(semanaInicio, yearForStart);\nif (startDate.getFullYear() < yearForStart) {\n    yearForStart++;\n    startDate = getDateOfISOWeek(semanaInicio, yearForStart);\n}\n\n// --- Calcular la fecha de fin ---\nlet endMonthDate = new Date();\nendMonthDate.setMonth(fechaActual.getMonth() + mesesProgramar);\nlet lastDayOfMonth = new Date(endMonthDate.getFullYear(), endMonthDate.getMonth() + 1, 0);\nlet lastSunday = new Date(lastDayOfMonth);\nlastSunday.setDate(lastDayOfMonth.getDate() + (6 - lastDayOfMonth.getDay()));\n\n// --- Generar todas las fechas entre startDate y lastSunday ---\nlet fechas = [];\nlet currentDate = new Date(startDate);\nwhile (currentDate <= lastSunday) {\n    fechas.push(new Date(currentDate));\n    currentDate.setDate(currentDate.getDate() + 1);\n}\n\n// --- Obtener las semanas únicas y ordenadas ---\nlet semanasSet = new Set();\nfechas.forEach(fecha => {\n    let semanaFecha = getISOWeek(fecha);\n    if (semanaFecha >= semanaInicio) {\n        semanasSet.add(semanaFecha);\n    }\n});\n/* let semanasOrden = [...semanasSet].sort((a, b) => a - b); */\n\n// Asegurar unicidad\nlet uniq = new Map();\nfechas.forEach(d => {\n    let k = d.toISOString().split('T')[0];\n    if (!uniq.has(k)) uniq.set(k, new Date(d));\n});\nfechas = [...uniq.values()];\n\n// Ordenar fechas\nfechas.sort((a, b) => a - b);\n\n// Preparar semanas ordenadas\nlet semanasOrden = [...semanasSet].sort((a, b) => a - b);\n\n// --- Procesamiento por persona ---\nlet creadoEn = getLocalISOString(), resultado = [];\nlet grupos = Math.ceil(IDs.length / 4);\nlet semanasOriginal = [seqA.slice(0, 7), seqA.slice(7, 14), seqA.slice(14, 21), seqA.slice(21, 28)];\n\nfor (let g = 0; g < grupos; g++) {\n    let base = g * 4, end = Math.min(base + 4, IDs.length);\n    let idxs = Array.from({ length: end - base }, (_, i) => base + i);\n\n    // --- Generar rotación intermitente ---\n    let rot = generarOrdenIntermitente(idxs.length);\n\n    idxs.forEach((i, j) => {\n        let r = rot[j];\n        let cyc = [].concat(...[\n            semanasOriginal[r % 4],\n            semanasOriginal[(r + 1) % 4],\n            semanasOriginal[(r + 2) % 4],\n            semanasOriginal[(r + 3) % 4]\n        ]);\n\n        let calendario = fechas.map((d, idx) => ({\n            fecha: d,\n            turno: cyc[idx % 28].turno\n        }));\n\n        let mapS = {};\n        calendario.forEach(c => {\n            let sem = getISOWeek(c.fecha);\n            let key = `semana${sem}`;\n            if (!mapS[key]) mapS[key] = [];\n            if (!mapS[key].some(x => x.fecha.getTime() === c.fecha.getTime()))\n                mapS[key].push(c);\n        });\n\n        let semanasPersona = {};\n        for (let sem of semanasOrden) {\n            let key = `semana${sem}`;\n            let dias = mapS[key] || [];\n            if (dias.length === 7) {\n                semanasPersona[key] = dias.map(c => {\n                    let d = c.fecha;\n                    let nn = d.getDay();\n                    let f = `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;\n                    return { [diasSemana[nn]]: c.turno, fecha: f };\n                });\n            }\n        }\n\n        resultado.push({\n            id: unwrapValue(IDs[i]),\n            cc: unwrapValue(CC[i]),\n            area,\n            nombres: combineName(nombresArray[i], apellidosArray[i]),\n            bloque: \"P\" + (r + 1),\n            creadoEn,\n            semanas: semanasPersona\n        });\n    });\n}\n\n// --- Resultado final ---\nmsg.payload = { creadoEn, registros: resultado };\nflow.set(\"Turno\", resultado);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 300,
+        "wires": [
+            [
+                "57631fb80fdde6a1"
+            ]
+        ]
+    },
+    {
+        "id": "1a97448feb28ecb8",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Db_SecuenciaA",
+        "collection": "(SFTR)_SecuenciaA",
+        "operation": "find.toArray",
+        "x": 600,
+        "y": 260,
+        "wires": [
+            [
+                "1637068d5dc7f2ac"
+            ]
+        ]
+    },
+    {
+        "id": "1637068d5dc7f2ac",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 33",
+        "func": "// Con Object.values(...) convertimos las propiedades \"0\",\"1\",\"2\",... en un array\nlet arrayReal = Object.values(msg.payload);\n\n// Guardamos el array real en flow context\nflow.set('secuenciaMongoA', arrayReal);\n\nreturn msg; // devolvemos el mensaje\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 260,
+        "wires": [
+            [
+                "435e1ed664355a21"
+            ]
+        ]
+    },
+    {
+        "id": "5b20a97b44f7acd7",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 34",
+        "func": "// Con Object.values(...) convertimos las propiedades \"0\",\"1\",\"2\",... en un array\nlet arrayReal = Object.values(msg.payload);\n\n// Guardamos el array real en flow context\nflow.set('secuenciaMongoB', arrayReal);\nflow.set('mesesProgramar', 2);\n\nreturn msg; // devolvemos el mensaje\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "03a87068838526bf"
+            ]
+        ]
+    },
+    {
+        "id": "435e1ed664355a21",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 36",
+        "func": "// Si tu nodo MongoDB usa msg.payload\nmsg.payload = {};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 260,
+        "wires": [
+            [
+                "5326d529b665f53b"
+            ]
+        ]
+    },
+    {
+        "id": "2eed1df3b53b6dc4",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Historial Programacion MDB",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "insertOne",
+        "x": 420,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e8d1b671816f82a5",
+        "type": "mongodb3 in",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "service": "_ext_",
+        "configNode": "231ca80c2cd7b9ce",
+        "name": "Consulta (repeticiones)",
+        "collection": "(SFTR)_Historial_Programacion",
+        "operation": "find.toArray",
+        "x": 230,
+        "y": 360,
+        "wires": [
+            [
+                "4a68c8ba91fbd0cf"
+            ]
+        ]
+    },
+    {
+        "id": "4ae3d5c008b09af3",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 40",
+        "func": "// Suponemos que msg.payload es el array final con todos los registros de empleados\nlet registros = msg.payload;\nlet area = flow.get(\"area\");\n\n// Creamos un objeto único que agrupe esos registros, por ejemplo:\nlet documento = {\n    creadoEn: new Date().toISOString(),\n    area_programada: area,\n    registros: registros\n};\n\n// Asignamos el objeto al msg.payload para enviarlo a MongoDB\nmsg.payload = documento;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "2eed1df3b53b6dc4",
+                "2053814b2e8ba74f"
+            ]
+        ]
+    },
+    {
+        "id": "4a68c8ba91fbd0cf",
+        "type": "switch",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "empty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 360,
+        "wires": [
+            [
+                "9457fe23a5cbd0d4",
+                "9045d0fc77933b8a"
+            ],
+            [
+                "9045d0fc77933b8a"
+            ]
+        ]
+    },
+    {
+        "id": "57631fb80fdde6a1",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 41",
+        "func": "// En un nodo function antes del mongodb3 in\nlet area = flow.get(\"area\");; // El área que necesitas filtrar\n// Obtén el área de forma dinámica\nconst fechaActual = new Date();\nconst hace170Dias = new Date();\n/* hace170Dias.setDate(hace170Dias.getDate() - 170); */ // <-- RESTA 14 días\n\n// Payload con filtro por área y fecha\nmsg.payload = {\n  \"registros.area\": area,\n  \"creadoEn\": {\n    \"$gte\": hace170Dias.toISOString(),\n    \"$lte\": fechaActual.toISOString()\n  }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 300,
+        "wires": [
+            [
+                "e8d1b671816f82a5"
+            ]
+        ]
+    },
+    {
+        "id": "9045d0fc77933b8a",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 42",
+        "func": "let data = flow.get(\"Turno\");  // Esto debería ser el array 'resultado'\nmsg.payload = data;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "a4671f2baac0edfd",
+                "4ae3d5c008b09af3"
+            ]
+        ]
+    },
+    {
+        "id": "4009da9374feb3ec",
+        "type": "http response",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "Response back",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9457fe23a5cbd0d4",
+        "type": "function",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "function 43",
+        "func": "msg.payload = [];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "4009da9374feb3ec"
+            ]
+        ]
+    },
+    {
+        "id": "2053814b2e8ba74f",
+        "type": "debug",
+        "z": "444c6d87b9487637",
+        "g": "d39c2fd81421091d",
+        "name": "debug 69",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "231ca80c2cd7b9ce",
+        "type": "mongodb3",
+        "uri": "mongodb://admin:G3lc02025*@192.168.170.2:27017/MDB_Local?authSource=admin",
+        "name": "Mongo_Local_Serv",
+        "options": "",
+        "parallelism": -1
+    }
+]
