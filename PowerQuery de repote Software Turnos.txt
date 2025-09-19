@@ -1,0 +1,105 @@
+let
+    // 1. Obtener datos desde MongoDB
+    Origen = Json.Document(Web.Contents("http://179.50.98.2:9565/DatosMongoDB")),
+    
+    // 2. Convertir lista de registros JSON a tabla
+ConvertidaEnTabla = Table.FromList(Record.ToList(Origen), Splitter.SplitByNothing(), {"RegistroRaiz"}),
+ExpandidoRaiz = Table.ExpandRecordColumn(ConvertidaEnTabla, "RegistroRaiz", {"_id", "creadoEn", "registros"}, {"_id", "creadoEn_global", "registros"}),
+
+    // 4. Convertir el array 'registros' en tabla con posición original
+    RegistrosConPosicion = Table.AddColumn(
+        ExpandidoRaiz, 
+        "RegistrosIndexados", 
+        each Table.AddIndexColumn(
+            Table.FromList([registros], Splitter.SplitByNothing(), {"Registro"}),
+            "PosicionOriginal", 1, 1, Int64.Type
+        ),
+        type table [Registro=any, PosicionOriginal=Int64.Type]
+    ),
+    
+    // 5. Remover columna original de registros
+    SinRegistrosOriginal = Table.RemoveColumns(RegistrosConPosicion, {"registros"}),
+    
+    // 6. Expandir la nueva tabla indexada
+    ExpandidoIndexado = Table.ExpandTableColumn(SinRegistrosOriginal, "RegistrosIndexados", {"Registro", "PosicionOriginal"}, {"Registro", "PosicionOriginal"}),
+    
+    // 7. Extraer campos del registro
+    CamposExpandidos = Table.ExpandRecordColumn(ExpandidoIndexado, "Registro", 
+        {"id", "cc", "area", "nombres", "bloque", "creadoEn", "semanas"},
+        {"id", "cc", "area", "nombres", "bloque", "creadoEn_empleado", "semanas"}),
+    
+    // 8. Expandir semanas manteniendo orden
+    SemanasComoTabla = Table.AddColumn(CamposExpandidos, "SemanasExpandida", each 
+        let
+            TablaSemanas = Record.ToTable([semanas]),
+            SemanasIndexadas = Table.AddIndexColumn(TablaSemanas, "OrdenSemana", 1, 1, Int64.Type),
+            TurnosExpandidos = Table.TransformColumns(SemanasIndexadas, {"Value", each 
+                Table.AddIndexColumn(
+                    Table.FromList(_, Splitter.SplitByNothing(), {"Dia"}),
+                    "OrdenDia", 1, 1, Int64.Type
+                )
+            })
+        in
+            TurnosExpandidos
+    ),
+    
+    // 9. Remover columna original de semanas
+    SinColumnaSemanas = Table.RemoveColumns(SemanasComoTabla, {"semanas"}),
+    
+    // 10. Expandir estructura de semanas
+    ExpandirSemanas = Table.ExpandTableColumn(SinColumnaSemanas, "SemanasExpandida", 
+        {"Name", "Value", "OrdenSemana"}, {"Semana", "Dias", "OrdenSemana"}),
+    
+    // 11. Expandir días de cada semana
+    ExpandirDias = Table.ExpandTableColumn(ExpandirSemanas, "Dias", 
+        {"Dia", "OrdenDia"}, {"Dia", "OrdenDia"}),
+    
+    // 12. Extraer datos de cada día
+    ExpandirRegistroDia = Table.ExpandRecordColumn(ExpandirDias, "Dia", 
+        {"fecha", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"}, 
+        {"fecha", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"}),
+    
+    // 13. Unpivot para normalizar días
+    ColumnasDias = {"lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"},
+    DiasUnpivoted = Table.Unpivot(ExpandirRegistroDia, ColumnasDias, "DiaNombre", "TipoTurno"),
+    
+    // 14. Filtrar valores válidos
+    DiasValidos = Table.SelectRows(DiasUnpivoted, each [TipoTurno] <> null and [TipoTurno] <> ""),
+    
+    // 15. Ordenar por índices
+    OrdenIntermedio = Table.Sort(DiasValidos, {
+        {"PosicionOriginal", Order.Ascending},
+        {"OrdenSemana", Order.Ascending},
+        {"OrdenDia", Order.Ascending}
+    }),
+    
+    // 16. Seleccionar columnas finales
+    ColumnasFinales = Table.SelectColumns(OrdenIntermedio, {
+        "PosicionOriginal", "cc", "nombres", "area", "bloque", 
+        "Semana", "DiaNombre", "TipoTurno", "fecha", "OrdenSemana", "OrdenDia"
+    }),
+    
+    // 17. Agregar columna para orden en matriz con bloque
+    ConOrdenMatriz = Table.AddColumn(ColumnasFinales, "OrdenMatriz", each 
+        Text.PadStart(Text.From([PosicionOriginal]), 4, "0") & " - " & [nombres] & " - " & [bloque],
+        type text
+    ),
+    
+    // 18. Definir tipos de datos
+    Tipos = Table.TransformColumnTypes(ConOrdenMatriz, {
+        {"PosicionOriginal", Int64.Type},
+        {"OrdenSemana", Int64.Type},
+        {"OrdenDia", Int64.Type},
+        {"cc", type text}, {"nombres", type text}, {"area", type text}, {"bloque", type text},
+        {"Semana", type text}, {"DiaNombre", type text}, {"TipoTurno", type text}, 
+        {"fecha", type date},
+        {"OrdenMatriz", type text}
+    }),
+    
+    // 19. Orden final opcional
+    OrdenFinal = Table.Sort(Tipos, {{"PosicionOriginal", Order.Ascending}}),
+    
+    // 20. Filas filtradas (sin condición real, solo para mantener estructura final)
+    #"Filas filtradas" = Table.SelectRows(OrdenFinal, each true)
+in
+    #"Filas filtradas"
